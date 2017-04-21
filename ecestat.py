@@ -4,15 +4,19 @@ import sys
 import os.path
 import json
 import argparse
-import collections
+if(sys.version_info < (2.7)):
+    from ordereddict import OrderedDict
+else:
+    from collections import OrderedDict
+
 
 statusfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),".ecestat.json")
 
 def load_stats():
     if(not os.path.exists(statusfile)):
-        return {"status" : [],"legs" : collections.OrderedDict}
+        return {"status" : [],"legs" : OrderedDict}
     statustext = open(statusfile).read()
-    return json.loads(statustext,object_pairs_hook = collections.OrderedDict)
+    return json.loads(statustext,object_pairs_hook = OrderedDict)
 
 def write(data):
     with open(statusfile,'w') as ofile:
