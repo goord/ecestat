@@ -5,7 +5,7 @@ import os.path
 import json
 import argparse
 
-statusfile = os.path.join(os.path.expanduser("~"),".ecestat.json")
+statusfile = os.path.join(os.path.dirname(os.path.realpath(__file__)),".ecestat.json")
 
 def load_stats():
     if(not os.path.exists(statusfile)):
